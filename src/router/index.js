@@ -1,0 +1,37 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Introduction from '../views/Introduction.vue'
+import Consent from '../views/Consent.vue'
+import Instructions from '../views/Instructions.vue'
+import Experiment from '../views/Experiment.vue'
+
+Vue.use(VueRouter)
+
+const routes = [
+  {
+    path: '/',
+    name: 'Introduction',
+    component: Introduction
+  },
+  {
+    path: '/instructions',
+    name: 'Instructions',
+    component: Instructions
+  },
+  {
+    path: '/consent',
+    name: 'Consent',
+    component: Consent
+  },
+  {
+    path: '/experiment',
+    name: 'Experiment',
+    component: Experiment
+  }
+]
+
+const router = new VueRouter({
+  routes
+})
+
+export default router
