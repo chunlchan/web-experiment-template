@@ -1,0 +1,7 @@
+id	group	sentence
+1	a	The purpose of this interview is to assess whether or not you are suitable for the company.
+2	b	Most words are used very rarely, which makes it difficult to remember vocabulary when learning foreign languages.
+3	c	I was emotionally drained after listening to John rave on about his marriage problems for two hours.
+4	a	Jim couldn't make the grade with Sally; she refused him when he asked her for a date.
+5	b	The drizzle turned into steady rain and we were soaked through by the time we got home.
+6	c	For example, Koko was asked to choose a house or a tree for shelter from the rain.

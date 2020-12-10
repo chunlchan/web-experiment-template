@@ -1,20 +1,24 @@
 <template>
   <v-container>
-    <h1>Consent Form Here</h1>
-    <v-btn @click="next()">next <v-icon>chevron_right</v-icon></v-btn>
+    <h1>Consent Form</h1>
+    <p>Consent text</p>
+    
+    <v-btn @click="goNext()">next <v-icon>chevron_right</v-icon></v-btn>
   </v-container>
 </template>
 
 <script>
-import router from "../router";
+import useFlow from "@/composables/useFlow.js";
 export default {
   name: "Consent",
   setup() {
-    const next = () => {
-      router.push("/instructions");
+    
+    const goNext = () => {
+      const {next} = useFlow();
+      next();
     };
 
-    return { next };
+    return { goNext };
   },
 };
 </script>
