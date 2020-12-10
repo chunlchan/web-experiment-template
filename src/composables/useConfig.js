@@ -3,7 +3,7 @@ import VueCompositionAPI from '@vue/composition-api'
 Vue.use(VueCompositionAPI)
 import { ref } from "@vue/composition-api";
 import router from "@/router";
-const provider = ref("mturk1");//change this to "prolific", "mturk" or "sona"
+const provider = ref("mturk");//change this to "prolific", "mturk" or "sona"
 const completionUrl = ref("");//leave as "" for mturk. If sona or prolific, insert completion url here.
 const participantId = ref("");
 
