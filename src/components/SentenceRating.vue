@@ -3,7 +3,7 @@
     <h2>{{ sentence }}</h2>
     <v-row align="center">
       <div class="mr-5">{{ leftLabel }}</div>
-      <v-radio-group row>
+      <v-radio-group row v-model="radioSelection">
         <v-radio
           v-for="radio in radioButtons"
           :key="radio.label"
@@ -13,12 +13,14 @@
       </v-radio-group>
       <div class="ml-3">{{ rightLabel }}</div>
     </v-row>
+    <v-btn @click="radioSelected()">Next <v-icon>chevron_right</v-icon></v-btn>
   </v-container>
 </template>
 
 <script>
 import { ref, onMounted } from "@vue/composition-api";
 export default {
+  emits: ["radio-selected"],
   props: {
     length: {
       type: Number,
@@ -41,7 +43,7 @@ export default {
       required: true,
     },
   },
-  setup(props) {
+  setup(props, context) {
     const radioButtons = ref([]);
     onMounted(() => {
       radioButtons.value = [];
@@ -52,7 +54,14 @@ export default {
         });
       }
     });
-    return { radioButtons };
+
+    const radioSelection = ref();
+    const radioSelected = () => {
+      context.emit("radio-selected", radioSelection.value);
+      radioSelection.value = null; 
+    }
+
+    return { radioButtons, radioSelection, radioSelected };
   },
 };
 </script>

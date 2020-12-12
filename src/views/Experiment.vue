@@ -6,45 +6,45 @@
       :rightLabel="'acceptable'"
       :length="7"
       :sentence="currentSentence"
+      @radio-selected="radioSelected"
     ></sentence-rating>
   </v-container>
 </template>
 
 <script>
 import SentenceRating from "../components/SentenceRating.vue";
-import Papa from "papaparse";
+import usePreloader from "@/composables/usePreloader.js"
+import useFlow from "@/composables/useFlow.js";
 import { ref, onMounted, watchEffect } from "@vue/composition-api";
 export default {
   components: { SentenceRating },
   setup() {
-    const list = ref([]);
+    const {list, loadList} = usePreloader();
     const index = ref(0)
     const currentSentence = ref("");
     watchEffect(() => {
-      if (list.value.length != 0) {
-        currentSentence.value = list.value[index.value].sentence;
-      } 
+      if(index.value < list.value.length){
+        if (list.value!=null && list.value.length != 0) {
+          currentSentence.value = list.value[index.value].sentence;
+        }  
+      } else {
+        const { next } = useFlow();
+        next();
+      }
     });
 
     onMounted(() => {
-      getList().then((listString) => {
+      loadList().then(()=>{
         index.value = 0;
-        var parsed = Papa.parse(listString, { header: true });
-        if (parsed.errors.length == 0) {
-          list.value = parsed.data;
-        } else {
-          console.log("csv parse error");
-        }
-      });
+      })
     });
 
-    async function getList() {
-      let response = await fetch("list.txt");
-      let list = await response.text();
-      return list;
+    const radioSelected = (radioSelection) => {
+      console.log(radioSelection);
+      index.value +=1;
     }
 
-    return { currentSentence };
+    return { currentSentence, radioSelected };
   },
 };
 </script>
